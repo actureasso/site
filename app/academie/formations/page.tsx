@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { FaGraduationCap, FaClock, FaUsers, FaBriefcase, FaCheckCircle, FaArrowLeft } from 'react-icons/fa'
+import { FaGraduationCap, FaClock, FaUsers, FaBriefcase, FaCheckCircle, FaArrowLeft, FaFilePdf } from 'react-icons/fa'
 import AnimatedSection from '@/components/AnimatedSection'
 import AnimatedCard from '@/components/AnimatedCard'
 
@@ -42,7 +42,8 @@ export default function Formations() {
         'Éco-conception numérique'
       ],
       debouches: 'Entrée en titre RNCP "Agent de reconditionnement", missions en fablab, emploi direct si niveau adéquat',
-      modalites: 'Formation préqualifiante'
+      modalites: 'Formation préqualifiante',
+      pdfUrl: '/documents/paris-fabrik-formation.pdf'
     },
     {
       id: 'via',
@@ -60,7 +61,8 @@ export default function Formations() {
         'Inclusion et pédagogie'
       ],
       debouches: 'BPJEPS, animation périscolaire, centres de loisirs, service civique',
-      modalites: 'Formation préqualifiante'
+      modalites: 'Formation préqualifiante',
+      pdfUrl: '/documents/paris-hospitalites-formation.pdf'
     }
   ]
 
@@ -154,13 +156,24 @@ export default function Formations() {
                     </div>
                   </div>
 
-                  <div className="pt-6 border-t border-gray-200">
+                  <div className="pt-6 border-t border-gray-200 flex flex-col sm:flex-row gap-4">
                     <Link 
                       href="/academie#inscriptions"
-                      className="inline-block bg-acture-green text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-smooth"
+                      className="inline-block bg-acture-green text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-smooth text-center"
                     >
                       S'inscrire à cette formation
                     </Link>
+                    {formation.pdfUrl && (
+                      <a 
+                        href={formation.pdfUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-smooth"
+                      >
+                        <FaFilePdf className="mr-2" />
+                        Télécharger la documentation (PDF)
+                      </a>
+                    )}
                   </div>
                 </div>
               </AnimatedCard>

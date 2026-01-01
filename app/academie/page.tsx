@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { FaGraduationCap, FaCertificate, FaUsers, FaClock, FaBriefcase } from 'react-icons/fa'
+import { FaGraduationCap, FaCertificate, FaUsers, FaClock, FaBriefcase, FaFilePdf } from 'react-icons/fa'
 
 export default function ActureAcademie() {
   return (
@@ -20,6 +20,13 @@ export default function ActureAcademie() {
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold mb-8 text-center">Présentation</h2>
+          
+          {/* Informations légales */}
+          <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-8 text-center">
+            <p className="text-gray-700">
+              <strong>N° de déclaration d'activité (OF) :</strong> 11757186775
+            </p>
+          </div>
           
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             <div>
@@ -176,6 +183,18 @@ export default function ActureAcademie() {
                   <li>Emploi direct si niveau adéquat</li>
                 </ul>
               </div>
+
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <a 
+                  href="/documents/paris-fabrik-formation.pdf" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+                >
+                  <FaFilePdf className="mr-2" />
+                  Télécharger la documentation (PDF)
+                </a>
+              </div>
             </div>
 
             {/* VIA */}
@@ -217,6 +236,18 @@ export default function ActureAcademie() {
                 <p className="text-gray-700 ml-6">
                   BPJEPS, animation périscolaire, centres de loisirs, service civique
                 </p>
+              </div>
+
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <a 
+                  href="/documents/paris-hospitalites-formation.pdf" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+                >
+                  <FaFilePdf className="mr-2" />
+                  Télécharger la documentation (PDF)
+                </a>
               </div>
             </div>
           </div>

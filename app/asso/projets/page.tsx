@@ -532,10 +532,24 @@ export default function Projets() {
               </div>
             </div>
             
-            <div className="bg-green-50 p-6 rounded-lg">
+            <div className="bg-green-50 p-6 rounded-lg mb-6">
               <p className="text-gray-700">
                 <strong>Statistiques :</strong> [À compléter avec les données du bilan 2025]
               </p>
+            </div>
+
+            <div className="bg-blue-50 border-2 border-acture-blue rounded-lg p-6">
+              <h4 className="font-semibold mb-3 text-acture-blue text-lg">Formations complémentaires</h4>
+              <p className="text-gray-700 mb-4">
+                Souhaitez-vous approfondir vos compétences avec une formation certifiante ou préqualifiante ? 
+                Découvrez les formations proposées par Acture Académie.
+              </p>
+              <Link 
+                href="/academie"
+                className="inline-block bg-acture-green text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition"
+              >
+                Découvrir Acture Académie →
+              </Link>
             </div>
           </div>
         </div>

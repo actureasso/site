@@ -13,17 +13,11 @@ export default function Footer() {
               Deviens acteur de ton aventure
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-300 hover:text-white transition">
-                <FaFacebook size={20} />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white transition">
-                <FaTwitter size={20} />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white transition">
-                <FaLinkedin size={20} />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white transition">
+              <a href="https://www.instagram.com/acture.asso/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition" aria-label="Instagram Acture">
                 <FaInstagram size={20} />
+              </a>
+              <a href="https://www.linkedin.com/company/acture-asso/?viewAsMember=true" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition" aria-label="LinkedIn Acture">
+                <FaLinkedin size={20} />
               </a>
             </div>
           </div>
