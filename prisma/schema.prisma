@@ -1,0 +1,154 @@
+// Schéma Prisma pour l'admin Acture
+// Base : SQLite en dev (facile), PostgreSQL possible en prod
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// En Prisma 7, l'URL est définie dans prisma.config.ts
+datasource db {
+  provider = "sqlite"
+}
+
+// ——— Auth ———
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  passwordHash  String    // bcrypt
+  name          String?
+  role          String    @default("redacteur") // admin | redacteur
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+// ——— Actualités ———
+model Article {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  date        DateTime
+  category    String   // Formation, Acture Asso, Jeunesse, etc.
+  excerpt     String
+  body        String?  // optionnel, pour page article détaillée
+  author      String
+  imageUrl    String?
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ——— Partenaires ———
+model PartenaireCategory {
+  id          String      @id @default(cuid())
+  name        String
+  order       Int         @default(0)
+  partenaires Partenaire[]
+}
+
+model Partenaire {
+  id         String             @id @default(cuid())
+  name       String
+  logoUrl    String?
+  url        String?            // lien site
+  categoryId String
+  category   PartenaireCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  order      Int                @default(0)
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+}
+
+// ——— Projets (sections de /asso/projets) ———
+model Projet {
+  id          String        @id @default(cuid())
+  slug        String        @unique  // quartier-connect, ain, clic, etc.
+  title       String
+  subtitle    String?
+  description String?
+  icon        String?       // nom icône FaUsers, FaLaptop, etc.
+  order       Int           @default(0)
+  blocks      ProjetBlock[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+// Blocs à l'intérieur d'un projet (texte, listes, témoignage, images, lien)
+model ProjetBlock {
+  id        String   @id @default(cuid())
+  projetId  String
+  projet    Projet   @relation(fields: [projetId], references: [id], onDelete: Cascade)
+  type      String   // title | paragraph | list | testimony | images | link | stats
+  order     Int      @default(0)
+  // Contenu flexible en JSON : { items: string[] } pour listes, { text, author } pour témoignage, etc.
+  content   String   // JSON
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ——— Média (fichiers uploadés) ———
+model Media {
+  id        String   @id @default(cuid())
+  filename  String
+  url       String   // chemin public /uploads/xxx
+  alt       String?
+  mimeType  String?
+  size      Int?
+  createdAt DateTime @default(now())
+}
+
+// ——— Formations (Académie) ———
+model Formation {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String?
+  duree       String?
+  prerequis   String?
+  link        String?  // URL PDF principal (rétrocompat)
+  pdfLinks    String?  // JSON array ["url1","url2"] pour plusieurs PDFs
+  order       Int      @default(0)
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ——— Événements ———
+model Evenement {
+  id          String           @id @default(cuid())
+  title       String
+  slug        String           @unique
+  date        DateTime?
+  lieu        String?
+  description String?
+  order       Int              @default(0)
+  images      EvenementImage[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+model EvenementImage {
+  id          String    @id @default(cuid())
+  evenementId String
+  evenement   Evenement @relation(fields: [evenementId], references: [id], onDelete: Cascade)
+  url         String
+  alt         String?
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+}
+
+// ——— Messages de contact ———
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String   // asso | academie | partenariat | soutien | autre
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+// ——— Paramètres site (contact, hero, légal) ———
+model SiteSetting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String
+}

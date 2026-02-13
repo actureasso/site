@@ -64,11 +64,24 @@ pm2 startup
 
 ## Configuration recommandée pour production
 
-Assurez-vous d'avoir ces variables d'environnement si nécessaire (créez un fichier `.env.production`) :
+Assurez-vous d'avoir ces variables d'environnement (Vercel/Netlify : Settings → Environment Variables, ou fichier `.env.production` en déploiement manuel) :
 
 ```
 NODE_ENV=production
+# Obligatoire pour l'authentification admin (NextAuth)
+NEXTAUTH_SECRET=<une-chaîne-aléatoire-longue-et-secrète>
+# Optionnel : URL du site (ex. https://acture.org) pour les liens dans les emails
+NEXTAUTH_URL=https://votre-domaine.com
+# URL publique du site (obligatoire pour un bon SEO : sitemap, Open Graph, JSON-LD)
+NEXT_PUBLIC_SITE_URL=https://votre-domaine.com
+# Si vous utilisez une base autre que SQLite (ex. PostgreSQL en prod)
+DATABASE_URL=file:./dev.db
+# Compte admin créé au premier seed (à changer après première connexion)
+ADMIN_EMAIL=admin@acture.org
+ADMIN_PASSWORD=changeme
 ```
+
+**Important :** Sans `NEXTAUTH_SECRET`, la connexion à l’espace admin ne fonctionnera pas en production. Générez une valeur avec par exemple : `openssl rand -base64 32`.
 
 ## Notes importantes
 

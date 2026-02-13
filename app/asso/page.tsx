@@ -1,11 +1,19 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { FaTrophy, FaMapMarkerAlt, FaUsers, FaHandshake } from 'react-icons/fa'
+import { buildMetadata } from '@/lib/seo'
+
+export const metadata: Metadata = buildMetadata({
+  title: 'Acture Asso',
+  description: 'Vie associative, projets et actions de quartier, insertion professionnelle. Acture - Paris 17e et 18e.',
+  path: '/asso',
+})
 
 export default function ActureAsso() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-acture-blue to-primary-blue text-white py-16 px-4">
+      <section className="bg-gradient-to-r from-acture-blue to-primary-blue text-white pt-24 md:pt-28 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Acture Asso</h1>
           <p className="text-xl md:text-2xl max-w-3xl">
@@ -18,7 +26,6 @@ export default function ActureAsso() {
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold mb-8 text-center">Présentation de l'association</h2>
-          
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             <div>
               <h3 className="text-2xl font-semibold mb-4 text-acture-blue">Notre histoire</h3>
@@ -33,7 +40,6 @@ export default function ActureAsso() {
                 la participation citoyenne.
               </p>
             </div>
-            
             <div>
               <h3 className="text-2xl font-semibold mb-4 text-acture-blue">Nos valeurs</h3>
               <ul className="space-y-3 text-gray-700">
@@ -126,7 +132,6 @@ export default function ActureAsso() {
       <section id="projets" className="py-16 px-4 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold mb-12 text-center">Projets & Actions de quartier</h2>
-          
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Quartier Connect */}
             <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
@@ -201,19 +206,27 @@ export default function ActureAsso() {
 
             {/* Insertion professionnelle */}
             <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
-              <h3 className="text-xl font-bold mb-4 text-acture-blue">Accompagnement à l'insertion</h3>
+              <h3 className="text-xl font-bold mb-4 text-acture-blue">Accompagnement à l&apos;insertion</h3>
               <p className="text-gray-700 mb-4">
-                Programme "Réussite Connect" pour accompagner vers l'emploi.
+                Programme &quot;Réussite Connect&quot; pour accompagner vers l&apos;emploi.
               </p>
               <ul className="text-sm text-gray-600 space-y-2 mb-4">
                 <li>• Ateliers CV et coaching</li>
-                <li>• Simulation d'entretiens</li>
+                <li>• Simulation d&apos;entretiens</li>
                 <li>• Orientation professionnelle</li>
                 <li>• Mise en réseau avec entreprises</li>
               </ul>
-              <Link href="/asso/projets#insertion" className="text-acture-blue hover:underline">
-                En savoir plus →
-              </Link>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/asso/projets#insertion" className="text-acture-blue hover:underline">
+                  En savoir plus →
+                </Link>
+                <Link 
+                  href="/academie" 
+                  className="inline-flex items-center bg-acture-green text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-green-700 transition"
+                >
+                  Formations certifiantes (Acture Académie) →
+                </Link>
+              </div>
             </div>
 
             {/* Réseau Numérique Parisien */}

@@ -1,10 +1,18 @@
+import type { Metadata } from 'next'
+import { buildMetadata } from '@/lib/seo'
+
+export const metadata: Metadata = buildMetadata({
+  title: 'Mentions légales',
+  description: 'Mentions légales du site Acture - éditeur, hébergeur, propriété intellectuelle.',
+  path: '/mentions-legales',
+})
+
 export default function MentionsLegales() {
   return (
     <div className="flex flex-col">
       <section className="bg-gray-50 py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold mb-8">Mentions Légales</h1>
-          
           <div className="bg-white rounded-lg shadow-lg p-8 space-y-8">
             <section>
               <h2 className="text-2xl font-semibold mb-4">1. Éditeur du site</h2>
